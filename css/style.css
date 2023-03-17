@@ -29,7 +29,7 @@ body {
 }
 
 div#log {
-  left: calc(50% - 160px);
+  left: calc(50% - 165px);
   background: white;
   padding-right: 10px;
   padding-left: 10px;
