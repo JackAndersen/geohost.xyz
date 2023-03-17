@@ -43,7 +43,7 @@ function addInfoWindow(marker, i, name, thumbnail_data, width, height, lat, lon)
  */
 function initialize() {
   var mapOptions = {
-    zoom: 7,
+    zoom: 8,
     center: new google.maps.LatLng(55.985511, 11.628375),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     scaleControl: true
