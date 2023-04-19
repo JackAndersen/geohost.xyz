@@ -14,31 +14,33 @@
     if (isset($_POST['submit'])) {
         $input = $_POST['input'];
         $host = "localhost";
-        $port = 5432;
         $dbname = "postgis_31_sample";
         $user = "postgres";
         $pass = "postgres";
+        $port = 5432;
+        $table = "tiger";
 
         // Create connection
-        $conn = new mysqli($host, $port, $user, $pass, $dbname);
+        $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pass");
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        if (!$conn) {
+            die("Connection failed: " . pg_last_error());
         }
 
-        $sql = "SELECT * FROM table WHERE column = '$input'";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM $table WHERE name = '$input'";
+        $result = pg_query($conn, $sql);
 
-        if ($result->num_rows > 0) {
+        if ($result) {
             // Output data of each row
-            while($row = $result->fetch_assoc()) {
+            while($row = pg_fetch_assoc($result)) {
                 echo "Column 1: " . $row["column1"]. " - Column 2: " . $row["column2"]. "<br>";
             }
         } else {
             echo "0 results";
         }
-        $conn->close();
+        pg_close($conn);
     }
     ?>
+
 </body>
 </html>
