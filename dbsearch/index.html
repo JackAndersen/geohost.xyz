@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SQL Request Website</title>
+</head>
+<body>
+	<label for="input">Enter a value:</label>
+	<input type="text" id="input">
+	<button onclick="sendRequest()">Submit</button>
+	
+
+	<div id="result"></div>
+
+	<script src="script.js"></script>
+</body>
+<script>
+function sendRequest() {
+    var input = document.getElementById("input").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("result").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("POST", "request.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("input=" + input);
+}
+</script>
+</html>
