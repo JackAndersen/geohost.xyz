@@ -6,7 +6,7 @@
 		function searchCSV() {
 			var searchInput = document.getElementById("searchInput").value; // Get the user input
 			var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-			request.open("GET", "https://example.com/data.csv", true); // Specify the URL of the CSV file
+			request.open("GET", "https://raw.githubusercontent.com/JackAndersen/geohost.xyz/main/evida/assets/GGLF_Linjefoering_lbnr.csv", true); // Specify the URL of the CSV file
 			request.onload = function() {
 				if (request.status == 200) { // Check if the request was successful
 					var rows = request.responseText.split("\n"); // Split the CSV data into rows
