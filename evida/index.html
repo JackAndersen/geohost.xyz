@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSV Search</title>
+	<script>
+		function searchCSV() {
+			var searchInput = document.getElementById("searchInput").value; // Get the user input
+			var request = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+			request.open("GET", "https://example.com/data.csv", true); // Specify the URL of the CSV file
+			request.onload = function() {
+				if (request.status == 200) { // Check if the request was successful
+					var rows = request.responseText.split("\n"); // Split the CSV data into rows
+					var found = false;
+					for (var i = 0; i < rows.length; i++) {
+						var row = rows[i].split(","); // Split the row into columns
+						if (row.indexOf(searchInput) != -1) { // Check if the search input is found in the row
+							document.getElementById("result").innerHTML = row.join(", "); // Display the row as comma-separated values
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						document.getElementById("result").innerHTML = "No results found.";
+					}
+				} else {
+					document.getElementById("result").innerHTML = "Error loading CSV file.";
+				}
+			};
+			request.send(); // Send the request
+		}
+	</script>
+</head>
+<body>
+	<h1>CSV Search</h1>
+	<label for="searchInput">Search:</label>
+	<input type="text" id="searchInput">
+	<button onclick="searchCSV()">Search</button>
+	<div id="result"></div>
+</body>
+</html>
